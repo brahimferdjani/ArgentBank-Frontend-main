@@ -1,0 +1,17 @@
+
+.features {
+    display: flex;
+    flex-direction: column;
+
+    .feature-item {
+        flex: 1;
+        padding: 2.5rem;
+
+        .feature-icon {
+            width: 100px;
+            border: 10px solid #00bc77;
+            border-radius: 50%;
+            padding: 1rem;
+        }
+      }
+  }

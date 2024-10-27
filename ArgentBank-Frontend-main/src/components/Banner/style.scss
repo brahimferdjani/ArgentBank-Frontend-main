@@ -1,0 +1,36 @@
+.banner {
+    margin: 50px 0 43px 0;
+    background:
+      url("/Users/brahimfer/Downloads/ArgentBank-Frontend-main/ArgentBank-Frontend-main/src/img/bank-tree.jpeg") 50% 50% / cover no-repeat;
+    height: 400px;
+    position: relative;
+
+    @media screen and (max-width: 655px) {
+      margin: 19px 0;
+      padding-top: 27px;
+      padding-bottom: 22px;
+      height: 111px;
+    }
+
+    h1, h2 {
+      margin: 0;
+      color: #fff;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      font-family: Montserrat;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 142.6%;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      text-align: center;
+
+      @media screen and (max-width: 655px) {
+        font-size: 24px;
+        left: 42%;
+        text-align: left;
+      }
+    }
+}

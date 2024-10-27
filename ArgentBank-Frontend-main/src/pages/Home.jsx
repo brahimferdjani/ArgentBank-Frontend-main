@@ -1,21 +1,27 @@
-import logo from '../img/argentBankLogo.png'
+import Banner from '../components/Banner/Banner'
+import logo from '/Users/brahimfer/Downloads/ArgentBank-Frontend-main/ArgentBank-Frontend-main/src/img/argentBankLogo.png'
+import './style.scss'
+import Cards from '../components/Cards/Cards'
 const Home = () => {
     return (
-        <nav >
+        <div>
+        <nav className='header'>
       <a>
         <img
           src={logo}
           alt="Argent Bank Logo"
         />
-        <h1>Argent Bank</h1>
       </a>
       <div>
-        <a href="./sign-in.html">
+        <a>
           <i className="fa fa-user-circle"></i>
           Sign In
         </a>
       </div>
     </nav>
+    <Banner />
+    <Cards />
+    </div>
     )
 }
 
