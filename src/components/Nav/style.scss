@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+
+  .main-nav-logo-image {
+    max-width: 100%;
+    width: 200px;
+  }
+
+  .header-nav {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    text-align: right;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+      text-decoration: none;
+    }
+  }
+}
