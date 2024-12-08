@@ -1,18 +1,21 @@
 import "./style.scss";
-import FontChat from "../../assets/img/icon-chat.png";
-function Cards() {
+import PropTypes from "prop-types";
+function Cards({ imageSrc, title, description }) {
   return (
     <div className="features">
       <div className="feature-item">
-        <img src={FontChat} alt="Credit Card" className="feature-icon" />
-        <h3 className="feature-item-title">You are our #1 priority</h3>
-        <p>
-          Need to talk to a representative? You can get in touch through our
-          24/7 chat or through a phone call in less than 5 minutes.
-        </p>
+        <img src={imageSrc} alt="Credit Card" className="feature-icon" />
+        {title}
+        {description}
       </div>
     </div>
   );
 }
+
+Cards.propTypes = {
+  imageSrc: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+};
 
 export default Cards;

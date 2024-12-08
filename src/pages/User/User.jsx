@@ -2,13 +2,31 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
+import { useState } from "react";
 function User() {
+  function getUser() {
+    let user = localStorage.getItem("user");
+    if (user) {
+      return JSON.parse(user);
+    } else {
+      user = null;
+    }
+    return user;
+  }
+
+  const { user } = useState(getUser());
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/login";
+  };
+
   return (
     <>
       <Nav>
         <Link to="/" className="header-nav">
           <i className="fa fa-sign-out"></i>
-          Sign Out
+          <button onClick={logout}>Sign Out</button>
         </Link>
       </Nav>
       <main className="main bg-dark">
@@ -16,7 +34,7 @@ function User() {
           <h1>
             Welcome back
             <br />
-            Tony Jarvis!
+            {user ? user.firstName : ""}
           </h1>
           <button className="edit-button">Edit Name</button>
         </div>
