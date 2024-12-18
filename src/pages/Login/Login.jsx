@@ -4,8 +4,8 @@ import "./style.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Store/UserSlice";
-import { useNavigate } from "react-router-dom";
 import { loginUser2 } from "../../Store/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -24,19 +24,14 @@ function Login() {
     };
 
     const result = await dispatch(loginUser(user));
+
     console.log(result);
     if (result.payload) {
       setUsername("");
       setPassword("");
       navigate("/profile");
+      dispatch(loginUser2());
     }
-
-    let token = {
-      token: result.payload.token,
-    };
-
-    const userProfile = dispatch(loginUser2(token));
-    console.log(userProfile);
   };
 
   return (

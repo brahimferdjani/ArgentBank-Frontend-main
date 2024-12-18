@@ -1,26 +1,19 @@
-import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
+import { useSelector } from "react-redux";
 
 function Profile() {
-  const logout = () => {
-    localStorage.removeItem("user");
-    window.location.href = "/login";
-  };
+  const firtName = useSelector((state) => state.user.user.firstName);
+  console.log(firtName);
 
   return (
     <>
-      <Nav>
-        <Link to="/" className="header-nav">
-          <i className="fa fa-sign-out"></i>
-          <button onClick={logout}>Sign Out</button>
-        </Link>
-      </Nav>
+      <Nav />
       <main className="main bg-dark">
         <div className="title">
           <h1>
-            Welcome back
+            Welcome back,
             <br />
           </h1>
           <button className="edit-button">Edit Name</button>
