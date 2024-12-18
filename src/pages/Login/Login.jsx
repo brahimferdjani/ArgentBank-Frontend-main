@@ -1,11 +1,11 @@
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
-import { Link } from "react-router-dom";
 import "./style.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Store/UserSlice";
 import { useNavigate } from "react-router-dom";
+import { loginUser2 } from "../../Store/UserSlice";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -16,22 +16,28 @@ function Login() {
 
   const { error } = useSelector((state) => state.user);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     let user = {
-      username,
-      password,
+      email: username,
+      password: password,
     };
-    dispatch(loginUser(user)).then((result) => {
-      if (result.payload) {
-        setUsername("");
-        setPassword("");
-        navigate("/User");
-      }
-    });
-  };
 
-  const user = useSelector((state) => state.user.user);
+    const result = await dispatch(loginUser(user));
+    console.log(result);
+    if (result.payload) {
+      setUsername("");
+      setPassword("");
+      navigate("/profile");
+    }
+
+    let token = {
+      token: result.payload.token,
+    };
+
+    const userProfile = dispatch(loginUser2(token));
+    console.log(userProfile);
+  };
 
   return (
     <>
@@ -39,7 +45,6 @@ function Login() {
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
-          {user ? <p>Sign Out</p> : <p>Sign In</p>}
           <form onSubmit={handleLogin}>
             <div className="input-wrapper">
               <label htmlFor="username">Username</label>

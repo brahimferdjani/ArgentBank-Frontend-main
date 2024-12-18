@@ -2,20 +2,8 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
-import { useState } from "react";
-function User() {
-  function getUser() {
-    let user = localStorage.getItem("user");
-    if (user) {
-      return JSON.parse(user);
-    } else {
-      user = null;
-    }
-    return user;
-  }
 
-  const { user } = useState(getUser());
-
+function Profile() {
   const logout = () => {
     localStorage.removeItem("user");
     window.location.href = "/login";
@@ -34,7 +22,6 @@ function User() {
           <h1>
             Welcome back
             <br />
-            {user ? user.firstName : ""}
           </h1>
           <button className="edit-button">Edit Name</button>
         </div>
@@ -55,4 +42,4 @@ function User() {
   );
 }
 
-export default User;
+export default Profile;
