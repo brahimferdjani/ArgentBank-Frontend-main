@@ -1,23 +1,39 @@
+import { useSelector } from "react-redux";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { getUserUsername, loginUser3 } from "../../Store/UserSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function Profile() {
-  const firtName = useSelector((state) => state.user.user.firstName);
-  console.log(firtName);
+  localStorage.getItem("token");
+  const { edit, setEdit } = useState(false);
+  const { username } = useState(useSelector(getUserUsername));
+  const dispatch = useState(useDispatch());
+  useEffect(() => {
+    dispatch(loginUser3(username));
+  });
+
+  function handleEdit() {
+    setEdit(!edit);
+  }
 
   return (
     <>
       <Nav />
       <main className="main bg-dark">
-        <div className="title">
-          <h1>
-            Welcome back,
-            <br />
-          </h1>
-          <button className="edit-button">Edit Name</button>
-        </div>
+        <form className="title" onSubmit={handleEdit}>
+          {edit ? (
+            <input className="input" type="text" />
+          ) : (
+            <h1>Welcome back, {username}</h1>
+          )}
+          <button type="submit" className="edit-button">
+            Edit Name
+          </button>
+        </form>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
           <div className="account-content-wrapper">

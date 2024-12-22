@@ -15,6 +15,13 @@ export const loginUser2 = createAsyncThunk("user/loginUser2", async () => {
     return response;
 });
 
+export const loginUser3 = createAsyncThunk("user/loginUser3", async (editUser) => {
+    const request = await axios.put('http://localhost:3001/api/v1/user/profile', editUser, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+    console.log(request);
+    const response = await request.data;
+    return response;
+});
+
 const userSlice = createSlice({
     name: "user",
     initialState: {
@@ -36,7 +43,6 @@ const userSlice = createSlice({
             .addCase(loginUser2.fulfilled, (state, action) => {
                 state.user = action.payload;
                 console.log("user", state.user.body.firstName);
-                state.token = action.payload.token;
                 state.error = null;
             })
             .addCase(loginUser2.rejected, (state, action) => {
