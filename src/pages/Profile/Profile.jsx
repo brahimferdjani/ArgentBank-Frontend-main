@@ -3,7 +3,8 @@ import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
 import { useState } from "react";
-import { getUserUsername, loginUser3 } from "../../Store/UserSlice";
+import { loginUser3 } from "../../Store/UserSlice";
+import { getUserUsername } from "../../Store/selectors";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
