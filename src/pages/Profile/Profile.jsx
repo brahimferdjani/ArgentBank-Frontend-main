@@ -10,13 +10,15 @@ import { useDispatch } from "react-redux";
 function Profile() {
   localStorage.getItem("token");
   const { edit, setEdit } = useState(false);
-  const { username } = useState(useSelector(getUserUsername));
+  const { username, setUsername } = useState(useSelector(getUserUsername));
   const dispatch = useState(useDispatch());
+  const editUser = { userName: `${username}` };
   useEffect(() => {
-    dispatch(loginUser3(username));
+    dispatch(loginUser3(editUser));
   });
 
-  function handleEdit() {
+  function handleEdit(e) {
+    e.preventDefault();
     setEdit(!edit);
   }
 
@@ -26,7 +28,12 @@ function Profile() {
       <main className="main bg-dark">
         <form className="title" onSubmit={handleEdit}>
           {edit ? (
-            <input className="input" type="text" />
+            <input
+              className="input"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           ) : (
             <h1>Welcome back, {username}</h1>
           )}
