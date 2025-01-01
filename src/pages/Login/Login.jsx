@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Store/UserSlice";
 import { useNavigate } from "react-router-dom";
-import { loginUser2 } from "../../Store/UserSlice";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -24,15 +23,10 @@ function Login() {
     };
 
     const result = await dispatch(loginUser(user));
-
     if (result.payload) {
       setUsername("");
       setPassword("");
       navigate("/profile");
-    }
-
-    {
-      result && dispatch(loginUser2());
     }
   };
 
