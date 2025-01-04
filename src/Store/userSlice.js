@@ -16,7 +16,7 @@ export const loginUser = createAsyncThunk("user/loginUser", async (user) => {
     }
 });
 
-export const getProfile = createAsyncThunk("user/getProfile", async () => {
+export const userInfo = createAsyncThunk("user/userInfo", async () => {
     try {
         const { data } = await axios.get('http://localhost:3001/api/v1/user/profile', authHeader());
         return data;
@@ -67,16 +67,15 @@ const userSlice = createSlice({
                 state.error = action.payload?.message || action.error.message;
             })
             // Get Profile
-            .addCase(getProfile.pending, (state) => {
+            .addCase(userInfo.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(getProfile.fulfilled, (state, action) => {
+            .addCase(userInfo.fulfilled, (state, action) => {
                 state.user = action.payload;
-                console.log(state.user);
                 state.loading = false;
             })
-            .addCase(getProfile.rejected, (state, action) => {
+            .addCase(userInfo.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload?.message || action.error.message;
             })
@@ -98,7 +97,7 @@ const userSlice = createSlice({
 });
 
 // Selectors
-export const selectUser = (state) => state.user.user.body;
+export const selectUser = (state) => state.user?.user?.body?.userName;
 export const selectToken = (state) => state.token;
 export const selectLoading = (state) => state.loading;
 export const selectError = (state) => state.error;

@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import { editName, selectLoading, selectUser } from "../../Store/UserSlice";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../../Store/UserSlice";
+import { userInfo } from "../../Store/UserSlice";
 function Profile() {
-  useEffect(() => {
-    dispatch(getProfile());
-  }, []);
-
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const user = useSelector(selectUser);
@@ -17,6 +13,8 @@ function Profile() {
 
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");
+
+  dispatch(userInfo());
 
   async function handleEdit(e) {
     e.preventDefault();
@@ -55,7 +53,7 @@ function Profile() {
                 />{" "}
               </div>
             ) : (
-              <h1>Welcome back, {username}</h1>
+              <h1>Welcome back, {user}</h1>
             )}
             <button type="submit" className="edit-button">
               {edit ? "Save" : "Edit Name"}
