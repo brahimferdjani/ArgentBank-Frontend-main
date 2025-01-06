@@ -10,7 +10,6 @@ const authHeader = () => ({
 export const userInfo = createAsyncThunk("get/userInfo", async () => {
     try {
         const { data } = await axios.get('http://localhost:3001/api/v1/user/profile', authHeader());
-        console.log(data);
         return data;
     } catch (error) {
         return error.response.data;
@@ -41,7 +40,7 @@ const getSlice = createSlice({
                 state.message = action.payload.message;
             })
             .addCase(userInfo.rejected, (state, action) => {
-                state.status = action.payload?.status || "idle";
+                state.status = action.payload?.status;
                 state.error = action.error.message;
                 state.body = null;
                 state.message = action.payload?.message;

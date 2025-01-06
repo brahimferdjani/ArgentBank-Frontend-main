@@ -38,6 +38,7 @@ function Login() {
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
+          <h1>Sign in</h1>
           <form onSubmit={handleLogin}>
             <div className="input-wrapper">
               <label htmlFor="username">Username</label>

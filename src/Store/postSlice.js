@@ -4,7 +4,6 @@ import axios from "axios";
 export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
     try {
         const { data } = await axios.post('http://localhost:3001/api/v1/user/login', user);
-        console.log(data);
         return data;
     } catch (error) {
         return error.response.data;
@@ -21,7 +20,7 @@ const postSlice = createSlice({
     },
     reducers: {
         logout: (state) => {
-            state.status = "idle";
+            state.status = null;
             state.message = null;
             state.body = null;
             state.error = null;
@@ -37,7 +36,7 @@ const postSlice = createSlice({
                 state.message = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
-                state.status = "idle";
+                state.status = action.payload.status;
                 state.error = null;
                 state.body = { ...action.payload };
                 state.message = null;

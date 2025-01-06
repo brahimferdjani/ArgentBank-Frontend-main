@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { logout } from "../../Store/postSlice";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 function Nav() {
   const navigate = useNavigate();
@@ -19,15 +18,10 @@ function Nav() {
 
   function handleLogout() {
     dispatch(logout());
+    navigate("/login");
   }
 
-  const isLogged = useSelector((state) => state.post.body);
-
-  useEffect(() => {
-    if (!isLogged) {
-      navigate("/login");
-    }
-  }, [isLogged, navigate]);
+  const isLogged = useSelector((state) => state.post.status === 200);
 
   return (
     <nav className="header">

@@ -5,7 +5,7 @@ function Cards({ imageSrc, title, description }) {
     <div className="features">
       <div className="feature-item">
         <img src={imageSrc} alt="Credit Card" className="feature-icon" />
-        {title}
+        <h2 className="feature-item-title">{title}</h2>
         {description}
       </div>
     </div>

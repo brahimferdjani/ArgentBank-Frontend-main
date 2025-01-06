@@ -2,12 +2,37 @@
   color: #fff;
   margin-bottom: 2rem;
 
-  .edit-button {
-    border-color: #00bc77;
-    background-color: #00bc77;
-    color: #fff;
-    font-weight: bold;
-    padding: 10px;
+  .flex-box {
+    .the-inputs {
+      margin: 1rem auto;
+      label {
+        padding: 0.5rem 0.5rem;
+      }
+
+      input {
+        padding: 10px;
+        margin: 0.5rem 1rem;
+        border: none;
+        background-color: none;
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    .the-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 15%;
+      margin: 1rem auto;
+      .edit-button {
+        border-color: #00bc77;
+        background-color: #00bc77;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px;
+        width: 100px;
+      }
+    }
   }
 }
 
