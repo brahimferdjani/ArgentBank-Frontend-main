@@ -3,7 +3,8 @@ import Nav from "../../components/Nav/Nav";
 import "./style.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../Store/UserSlice";
+import { loginUser } from "../../Store/postSlice";
+import { userInfo } from "../../Store/getSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -13,7 +14,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { error } = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.post);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ function Login() {
       setPassword("");
       navigate("/profile");
     }
+    dispatch(userInfo());
   };
 
   return (

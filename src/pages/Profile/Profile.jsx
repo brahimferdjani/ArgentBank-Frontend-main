@@ -1,20 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
-import { editName, selectLoading, selectUser } from "../../Store/UserSlice";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { userInfo } from "../../Store/UserSlice";
+import { editName } from "../../Store/editSlice";
+import { userInfo } from "../../Store/getSlice";
+import { useRef } from "react";
 function Profile() {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
-  const user = useSelector(selectUser);
-  console.log(user);
+  const { body, status } = useSelector((state) => state.get);
+
+  const loading = status === "loading";
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(userInfo());
+    }
+  }, [dispatch, status]);
 
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");
-
-  dispatch(userInfo());
 
   async function handleEdit(e) {
     e.preventDefault();
@@ -26,7 +31,7 @@ function Profile() {
       };
       try {
         await dispatch(editName(editUser));
-        alert("Username updated successfully!");
+        dispatch(userInfo());
       } catch (error) {
         alert("Failed to update username: " + error.message);
       }
@@ -34,6 +39,8 @@ function Profile() {
     // Toggle the edit mode
     setEdit(!edit);
   }
+
+  const inputRef = useRef(null);
 
   return (
     <>
@@ -48,16 +55,31 @@ function Profile() {
                 <input
                   className="account-title"
                   type="text"
+                  ref={inputRef}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />{" "}
+                <button
+                  type="submit"
+                  className="edit-button"
+                  onClick={() => {
+                    inputRef.current.focus();
+                  }}
+                >
+                  {edit ? "Save" : "Edit Name"}
+                </button>
               </div>
             ) : (
-              <h1>Welcome back, {user}</h1>
+              <h1>
+                Welcome back, {body?.firstName} {body?.lastName}{" "}
+                {body?.userName}
+              </h1>
             )}
-            <button type="submit" className="edit-button">
-              {edit ? "Save" : "Edit Name"}
-            </button>
+            {!edit && (
+              <button type="submit" className="edit-button">
+                Edit Name
+              </button>
+            )}
           </form>
         )}
         <section className="account">
