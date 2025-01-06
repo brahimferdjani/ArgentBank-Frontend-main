@@ -35,7 +35,7 @@ const getSlice = createSlice({
                 state.message = null;
             })
             .addCase(userInfo.fulfilled, (state, action) => {
-                state.status = action.payload.status || "idle";
+                state.status = action.payload.status;
                 state.error = null;
                 state.body = action.payload.body;
                 state.message = action.payload.message;

@@ -12,7 +12,7 @@ function Home() {
       <Banner />
       <div className="features">
         <Cards
-          imageSrc={"assets/images/icon-features.png"}
+          imageSrc={"assets/images/icon-chat.png"}
           title={"Features"}
           description={
             "Our aim is to make it quick and easy for you to access your account anywhere, on any device."
@@ -25,7 +25,13 @@ function Home() {
             "We use top of the range encryption to ensure your data and money is always safe."
           }
         />
-        <Cards />
+        <Cards
+          imageSrc={"assets/images/icon-security.png"}
+          title={"Accessibility"}
+          description={
+            "Using our state of the art technology you can access your account from anywhere."
+          }
+        />
       </div>
       <Footer />
     </div>

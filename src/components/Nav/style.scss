@@ -9,6 +9,11 @@
     width: 200px;
   }
 
+  .flex-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .header-nav {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     text-align: right;

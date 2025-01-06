@@ -25,7 +25,6 @@ const postSlice = createSlice({
             state.message = null;
             state.body = null;
             state.error = null;
-            localStorage.removeItem("token");
         }
     },
     extraReducers: (builder) => {

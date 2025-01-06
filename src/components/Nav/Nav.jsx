@@ -3,14 +3,31 @@ import Logo from "../../assets/img/argentBankLogo.png";
 import "./style.scss";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { logout } from "../../Store/postSlice";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function Nav() {
   const navigate = useNavigate();
+  function handleClick() {
+    navigate("/login");
+  }
+
+  const { body } = useSelector((state) => state.get);
+  const dispatch = useDispatch();
 
   function handleLogout() {
-    localStorage.removeItem("token");
-    navigate("/");
+    dispatch(logout());
   }
+
+  const isLogged = useSelector((state) => state.post.body);
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate("/login");
+    }
+  }, [isLogged, navigate]);
 
   return (
     <nav className="header">
@@ -21,19 +38,26 @@ function Nav() {
           alt="Argent Bank Logo"
         />
       </Link>
-      {localStorage.getItem("token") ? (
-        <div>
-          <button type="button" onClick={handleLogout}>
-            <i className="fa fa-user-circle"></i>{" "}
-          </button>
-        </div>
-      ) : (
-        <div>
-          <Link to="/login" className="header-nav">
+      <div>
+        {isLogged ? (
+          <div className="flex-box">
+            <div className="header-nav">
+              <i className="fa fa-user-circle"></i>
+              {" " + body?.userName}
+            </div>
+            <div onClick={handleLogout}>
+              <i className="fa-solid fa-right-from-bracket">
+                <span className="header-nav"> Sign Out</span>
+              </i>
+            </div>
+          </div>
+        ) : (
+          <div onClick={handleClick}>
             <i className="fa fa-user-circle"></i>
-          </Link>
-        </div>
-      )}
+            <span className="header-nav"> Sign In</span>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
