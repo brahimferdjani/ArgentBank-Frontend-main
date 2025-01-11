@@ -21,7 +21,8 @@ function Nav() {
     navigate("/login");
   }
 
-  const isLogged = useSelector((state) => state.post.status === 200);
+  const isLogged =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
 
   return (
     <nav className="header">
@@ -33,7 +34,7 @@ function Nav() {
         />
       </Link>
       <div>
-        {isLogged ? (
+        {isLogged !== "null" ? (
           <div className="flex-box">
             <div className="header-nav">
               <i className="fa fa-user-circle"></i>

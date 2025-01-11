@@ -15,14 +15,16 @@ const postSlice = createSlice({
     initialState: {
         status: "idle",
         message: null,
-        body: {},
+        body: null,
         error: null
     },
     reducers: {
         logout: (state) => {
+            localStorage.removeItem("token");
+            sessionStorage.removeItem("token");
+            state.body = null;
             state.status = null;
             state.message = null;
-            state.body = null;
             state.error = null;
         }
     },
@@ -38,9 +40,9 @@ const postSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.status = action.payload.status;
                 state.error = null;
-                state.body = { ...action.payload };
+                state.body = action.payload.body;
+                console.log(state.body);
                 state.message = null;
-                localStorage.setItem("token", action.payload.body.token);
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.status = "idle";

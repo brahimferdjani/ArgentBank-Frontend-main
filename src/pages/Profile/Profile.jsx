@@ -6,17 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { editName } from "../../Store/editSlice";
 import { userInfo } from "../../Store/getSlice";
 import { useRef } from "react";
+
 function Profile() {
   const dispatch = useDispatch();
   const { body, status } = useSelector((state) => state.get);
+  const token =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
 
   const loading = status === "loading";
 
   useEffect(() => {
-    if (status === "idle") {
+    if (token !== "null") {
       dispatch(userInfo());
     }
-  }, [dispatch, status]);
+  }, [dispatch, token]);
 
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");
@@ -25,7 +28,6 @@ function Profile() {
     e.preventDefault();
 
     if (edit) {
-      // Submit the edit to the backend
       const editUser = {
         userName: username,
       };
@@ -36,7 +38,6 @@ function Profile() {
         alert("Failed to update username: " + error.message);
       }
     }
-    // Toggle the edit mode
     setEdit(!edit);
   }
 

@@ -7,8 +7,20 @@ import Footer from "../../components/Footer/Footer";
 import chat from "../../assets/img/icon-chat.png";
 import money from "../../assets/img/icon-money.png";
 import security from "../../assets/img/icon-security.png";
+import { useEffect } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+  const token =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
+  useEffect(() => {
+    if (token !== "null") {
+      navigate("/profile");
+    }
+  }, [navigate, token]);
+
   return (
     <div>
       <Nav />

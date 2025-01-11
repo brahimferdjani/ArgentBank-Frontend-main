@@ -6,13 +6,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Store/postSlice";
 import { userInfo } from "../../Store/getSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [checked, setChecked] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log(checked);
+
+  const token =
+    useSelector((state) => state.post.body?.token) ||
+    localStorage.getItem("token") ||
+    sessionStorage.getItem("token");
+
+  useEffect(() => {
+    if (token !== "null") {
+      navigate("/profile");
+    }
+  }, [navigate, token]);
+
+  if (checked) {
+    localStorage.setItem("token", token);
+  } else {
+    sessionStorage.setItem("token", token);
+  }
 
   const { error } = useSelector((state) => state.post);
 
@@ -59,7 +78,12 @@ function Login() {
               />
             </div>
             <div className="input-remember">
-              <input type="checkbox" id="remember-me" />
+              <input
+                type="checkbox"
+                id="remember-me"
+                checked={checked}
+                onChange={(e) => setChecked(e.target.checked)}
+              />
               <label htmlFor="remember-me">Remember me</label>
             </div>
             <button type="submit" className="sign-in-button">
