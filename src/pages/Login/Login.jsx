@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Store/postSlice";
 import { userInfo } from "../../Store/getSlice";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -14,24 +13,6 @@ function Login() {
   const [checked, setChecked] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(checked);
-
-  const token =
-    useSelector((state) => state.post.body?.token) ||
-    localStorage.getItem("token") ||
-    sessionStorage.getItem("token");
-
-  useEffect(() => {
-    if (token !== "null") {
-      navigate("/profile");
-    }
-  }, [navigate, token]);
-
-  if (checked) {
-    localStorage.setItem("token", token);
-  } else {
-    sessionStorage.setItem("token", token);
-  }
 
   const { error } = useSelector((state) => state.post);
 

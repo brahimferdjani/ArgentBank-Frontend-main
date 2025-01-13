@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
@@ -10,16 +10,8 @@ import { useRef } from "react";
 function Profile() {
   const dispatch = useDispatch();
   const { body, status } = useSelector((state) => state.get);
-  const token =
-    localStorage.getItem("token") || sessionStorage.getItem("token");
 
   const loading = status === "loading";
-
-  useEffect(() => {
-    if (token !== "null") {
-      dispatch(userInfo());
-    }
-  }, [dispatch, token]);
 
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");

@@ -1,16 +1,14 @@
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ children }) => {
   const token =
-    useSelector((state) => state.post.body?.token) ||
+    useSelector((state) => state.get).body?.token ||
     localStorage.getItem("token") ||
     sessionStorage.getItem("token");
 
-  console.log(token);
-
-  return token !== "null" ? children : <Navigate to="/login" />;
+  return token ? children : <Navigate to="/login" />;
 };
 
 ProtectedRoute.propTypes = {

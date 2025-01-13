@@ -10,6 +10,7 @@ export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
     }
 });
 
+
 const postSlice = createSlice({
     name: "post",
     initialState: {
