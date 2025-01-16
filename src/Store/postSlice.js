@@ -3,7 +3,10 @@ import axios from "axios";
 
 export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
     try {
-        const { data } = await axios.post('http://localhost:3001/api/v1/user/login', user);
+        const { data } = await axios.post('http://localhost:3001/api/v1/user/login', { email: user.email, password: user.password });
+        console.log("data", data); //ou est le token ?
+        console.log("rememberMe", user.rememberMe);
+        user.rememberMe ? localStorage.setItem("token", data.token) : sessionStorage.setItem("token", data.token); //2 - store token local ou session
         return data;
     } catch (error) {
         return error.response.data;
@@ -14,9 +17,7 @@ export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
 const postSlice = createSlice({
     name: "post",
     initialState: {
-        status: "idle",
         message: null,
-        body: null,
         error: null
     },
     reducers: {

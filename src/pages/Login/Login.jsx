@@ -21,6 +21,7 @@ function Login() {
     let user = {
       email: username,
       password: password,
+      rememberMe: checked, // 1- rememberMe
     };
 
     const result = await dispatch(loginUser(user));

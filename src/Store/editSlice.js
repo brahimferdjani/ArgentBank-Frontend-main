@@ -23,6 +23,7 @@ const editSlice = createSlice({
         message: null,
         body: {},
         error: null
+
     },
     reducers: {},
     extraReducers: (builder) => {

@@ -23,6 +23,7 @@ const getSlice = createSlice({
         message: null,
         body: null,
         error: null
+        //store token 
     },
     reducers: {},
     extraReducers: (builder) => {
