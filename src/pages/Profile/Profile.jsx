@@ -44,68 +44,28 @@ function Profile() {
         ) : (
           <form className="title" onSubmit={handleEdit}>
             {edit ? (
-              <div className="flex-box">
-                <h1>Edit user info</h1>
-                <div className="the-inputs">
-                  <label htmlFor="username">User name :</label>
-                  <input
-                    name="username"
-                    className="account-title"
-                    type="text"
-                    ref={inputRef}
-                    placeholder={body?.userName}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                  <br />
-                  <label htmlFor="firstname">First name :</label>
-                  <input
-                    name="firstname"
-                    className="account-title"
-                    type="text"
-                    ref={inputRef}
-                    value={body?.firstName}
-                    disabled
-                  />
-                  <br />
-                  <label htmlFor="lastname">Last name :</label>
-                  <input
-                    name="lastname"
-                    className="account-title"
-                    type="text"
-                    ref={inputRef}
-                    value={body?.lastName}
-                    disabled
-                  />
-                </div>
-                <div className="the-buttons">
-                  <button
-                    type="submit"
-                    className="edit-button"
-                    onClick={() => {
-                      inputRef.current.focus();
-                    }}
-                  >
-                    {edit ? "Save" : "Edit Name"}
-                  </button>
-                  {edit && (
-                    <button
-                      type="reset"
-                      className="edit-button"
-                      onClick={() => {
-                        setUsername(username);
-                        setEdit(!edit);
-                      }}
-                    >
-                      Cancel
-                    </button>
-                  )}
-                </div>
+              <div>
+                <input
+                  className="account-title"
+                  type="text"
+                  ref={inputRef}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />{" "}
+                <button
+                  type="submit"
+                  className="edit-button"
+                  onClick={() => {
+                    inputRef.current.focus();
+                  }}
+                >
+                  {edit ? "Save" : "Edit Name"}
+                </button>
               </div>
             ) : (
               <h1>
-                Welcome back <br /> {body?.firstName} {body?.lastName}
-                {" !"}
+                Welcome back, {body?.firstName} {body?.lastName}{" "}
+                {body?.userName}
               </h1>
             )}
             {!edit && (

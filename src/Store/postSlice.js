@@ -3,10 +3,7 @@ import axios from "axios";
 
 export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
     try {
-        const { data } = await axios.post('http://localhost:3001/api/v1/user/login', { email: user.email, password: user.password });
-        console.log("data", data); //ou est le token ?
-        console.log("rememberMe", user.rememberMe);
-        user.rememberMe ? localStorage.setItem("token", data.token) : sessionStorage.setItem("token", data.token); //2 - store token local ou session
+        const { data } = await axios.post('http://localhost:3001/api/v1/user/login', user);
         return data;
     } catch (error) {
         return error.response.data;
@@ -22,9 +19,6 @@ const postSlice = createSlice({
     },
     reducers: {
         logout: (state) => {
-            localStorage.removeItem("token");
-            sessionStorage.removeItem("token");
-            state.body = null;
             state.status = null;
             state.message = null;
             state.error = null;
@@ -40,7 +34,7 @@ const postSlice = createSlice({
                 state.message = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
-                state.status = action.payload.status;
+                state.status = "idle";
                 state.error = null;
                 state.body = action.payload.body;
                 console.log(state.body);

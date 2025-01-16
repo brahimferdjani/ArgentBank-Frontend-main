@@ -7,9 +7,6 @@ import Footer from "../../components/Footer/Footer";
 import chat from "../../assets/img/icon-chat.png";
 import money from "../../assets/img/icon-money.png";
 import security from "../../assets/img/icon-security.png";
-import { useEffect } from "react";
-
-import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
@@ -27,21 +24,21 @@ function Home() {
       <Banner />
       <div className="features">
         <Cards
-          imageSrc={chat}
+          imageSrc={"assets/images/icon-chat.png"}
           title={"Features"}
           description={
             "Our aim is to make it quick and easy for you to access your account anywhere, on any device."
           }
         />
         <Cards
-          imageSrc={money}
+          imageSrc={"assets/images/icon-money.png"}
           title={"Security"}
           description={
             "We use top of the range encryption to ensure your data and money is always safe."
           }
         />
         <Cards
-          imageSrc={security}
+          imageSrc={"assets/images/icon-security.png"}
           title={"Accessibility"}
           description={
             "Using our state of the art technology you can access your account from anywhere."
