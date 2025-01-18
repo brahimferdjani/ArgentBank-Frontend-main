@@ -8,9 +8,9 @@ import { userInfo } from "../../Store/getSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [checked, setChecked] = useState(true);
+  let [username, setUsername] = useState("");
+  let [password, setPassword] = useState("");
+  let [checked, setChecked] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,6 +46,7 @@ function Login() {
                 <input
                   type="text"
                   id="username"
+                  placeholder={username}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />

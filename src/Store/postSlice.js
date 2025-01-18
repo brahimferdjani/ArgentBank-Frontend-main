@@ -21,18 +21,17 @@ export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
 const postSlice = createSlice({
     name: "post",
     initialState: {
-        message: null,
+        status: null,
+        token: null,
         error: null,
     },
     reducers: {
         logout: (state) => {
-            state.status = null;
-            state.body = null;
-            state.message = null;
+            state.token = null;
             state.error = null;
             localStorage.removeItem("token");
             sessionStorage.removeItem("token");
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -40,25 +39,21 @@ const postSlice = createSlice({
             .addCase(loginUser.pending, (state) => {
                 state.status = "loading";
                 state.error = null;
-                state.body = null;
-                state.message = null;
+                state.token = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
-                state.status = "idle";
+                state.status = action.payload?.status;
                 state.error = null;
-                state.body = action.payload.body;
-                console.log(state.body);
-                state.message = null;
+                state.token = action.payload.body;
             })
             .addCase(loginUser.rejected, (state, action) => {
-                state.status = "idle";
+                state.status = action.payload?.status;
                 state.error = action.payload?.message || action.error.message;
-                state.body = null;
-                state.message = null;
+                state.token = null;
             })
     }
 });
 
-export const { logout, savedName } = postSlice.actions;
+export const { logout } = postSlice.actions;
 
 export default postSlice.reducer;

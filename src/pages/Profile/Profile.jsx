@@ -10,6 +10,7 @@ import { useRef } from "react";
 function Profile() {
   const dispatch = useDispatch();
   const { body, status } = useSelector((state) => state.get);
+  const { token } = useSelector((state) => state.post);
 
   const loading = status === "loading";
 
@@ -17,10 +18,10 @@ function Profile() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+    if (token) {
       dispatch(userInfo());
     }
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   async function handleEdit(e) {
     e.preventDefault();
