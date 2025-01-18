@@ -21,7 +21,7 @@ function Login() {
     let user = {
       email: username,
       password: password,
-      rememberMe: checked, // 1- rememberMe
+      rememberMe: checked,
     };
 
     const result = await dispatch(loginUser(user));
@@ -42,12 +42,21 @@ function Login() {
           <form onSubmit={handleLogin}>
             <div className="input-wrapper">
               <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              {checked ? (
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              ) : (
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              )}
             </div>
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>

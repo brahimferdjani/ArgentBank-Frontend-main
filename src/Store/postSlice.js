@@ -3,7 +3,14 @@ import axios from "axios";
 
 export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
     try {
-        const { data } = await axios.post('http://localhost:3001/api/v1/user/login', user);
+        const { data } = await axios.post('http://localhost:3001/api/v1/user/login', { email: user.email, password: user.password });
+        console.log("post payload :", data);
+        user.rememberMe ? localStorage.setItem("token", data.body.token) : sessionStorage.setItem("token", data.body.token);
+        if (sessionStorage.getItem("token")) {
+            setTimeout(() => {
+                sessionStorage.removeItem("token");
+            }, 5000);
+        }
         return data;
     } catch (error) {
         return error.response.data;
@@ -15,14 +22,17 @@ const postSlice = createSlice({
     name: "post",
     initialState: {
         message: null,
-        error: null
+        error: null,
     },
     reducers: {
         logout: (state) => {
             state.status = null;
+            state.body = null;
             state.message = null;
             state.error = null;
-        }
+            localStorage.removeItem("token");
+            sessionStorage.removeItem("token");
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -49,6 +59,6 @@ const postSlice = createSlice({
     }
 });
 
-export const { logout } = postSlice.actions;
+export const { logout, savedName } = postSlice.actions;
 
 export default postSlice.reducer;

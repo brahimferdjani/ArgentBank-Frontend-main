@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
@@ -15,6 +15,12 @@ function Profile() {
 
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      dispatch(userInfo());
+    }
+  }, [dispatch]);
 
   async function handleEdit(e) {
     e.preventDefault();
@@ -55,8 +61,8 @@ function Profile() {
                 <button
                   type="submit"
                   className="edit-button"
-                  onClick={() => {
-                    inputRef.current.focus();
+                  onClick={(e) => {
+                    e.target.blur();
                   }}
                 >
                   {edit ? "Save" : "Edit Name"}
