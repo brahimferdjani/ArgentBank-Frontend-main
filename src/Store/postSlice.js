@@ -10,6 +10,8 @@ export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
             setTimeout(() => {
                 sessionStorage.removeItem("token");
             }, 5000);
+        } else if (localStorage.getItem("token")) {
+            localStorage.setItem("userEmail", user.email);
         }
         return data;
     } catch (error) {
@@ -30,7 +32,7 @@ const postSlice = createSlice({
             state.token = null;
             state.error = null;
             localStorage.removeItem("token");
-            sessionStorage.removeItem("token");
+            sessionStorage.clear();
         }
     },
     extraReducers: (builder) => {

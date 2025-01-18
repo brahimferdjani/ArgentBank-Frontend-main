@@ -11,6 +11,7 @@ const NotFound = () => {
       }, 3000);
     };
     homeTimer();
+    return () => clearTimeout(homeTimer);
   }, [navigate]);
 
   return (

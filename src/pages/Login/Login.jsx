@@ -46,16 +46,21 @@ function Login() {
                 <input
                   type="text"
                   id="username"
-                  placeholder={username}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={checked ? localStorage.getItem("userEmail") : username}
+                  onChange={(e) =>
+                    setUsername(e.target.value) ||
+                    localStorage.setItem("userEmail", e.target.value)
+                  }
                 />
               ) : (
                 <input
                   type="text"
                   id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={username || localStorage.getItem("userEmail")}
+                  onChange={(e) =>
+                    setUsername(e.target.value) ||
+                    localStorage.setItem("userEmail", e.target.value)
+                  }
                 />
               )}
             </div>
