@@ -14,7 +14,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { error } = useSelector((state) => state.post);
+  let { status } = useSelector((state) => state.post);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -82,10 +82,11 @@ function Login() {
               />
               <label htmlFor="remember-me">Remember me</label>
             </div>
+            {status == 400 && <p className="error">Invalid Fields</p>}
+            {status == 500 && <p className="error">Internal Server Error</p>}
             <button type="submit" className="sign-in-button">
               Sign In
             </button>
-            {error && <p>{error}</p>}
           </form>
         </section>
       </main>

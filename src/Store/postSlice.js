@@ -46,11 +46,11 @@ const postSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.status = action.payload?.status;
                 state.error = null;
-                state.token = action.payload.body;
+                state.token = action.payload?.body;
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.status = action.payload?.status;
-                state.error = action.payload?.message || action.error.message;
+                state.error = action.payload?.message;
                 state.token = null;
             })
     }
