@@ -33,25 +33,24 @@ function Nav() {
           alt="Argent Bank Logo"
         />
       </Link>
-      <div>
+      <div className="flex-box">
         {isLogged ? (
-          <div className="flex-box">
+          <div>
             <div className="header-nav">
               <Link to="/profile">
                 <i className="fa fa-user-circle"></i>
                 {" " + body?.userName}
               </Link>
             </div>
-            <div onClick={handleLogout}>
-              <i className="fa-solid fa-right-from-bracket">
-                <span className="header-nav"> Sign Out</span>
-              </i>
+            <div className="header-nav" onClick={handleLogout}>
+              <i className="fa-solid fa-right-from-bracket"></i>
+              <p>Sign Out</p>
             </div>
           </div>
         ) : (
-          <div onClick={handleClick}>
+          <div className="header-nav" onClick={handleClick}>
             <i className="fa fa-user-circle"></i>
-            <span className="header-nav"> Sign In</span>
+            <p>Sign In</p>
           </div>
         )}
       </div>

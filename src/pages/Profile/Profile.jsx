@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { editName } from "../../Store/editSlice";
 import { userInfo } from "../../Store/getSlice";
-import { useRef } from "react";
 
 function Profile() {
   const dispatch = useDispatch();
   const { body, status } = useSelector((state) => state.get);
-  const { token } = useSelector((state) => state.post);
 
   const loading = status === "loading";
 
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    if (token) {
-      dispatch(userInfo());
-    }
-  }, [dispatch, token]);
 
   async function handleEdit(e) {
     e.preventDefault();
@@ -40,8 +32,6 @@ function Profile() {
     setEdit(!edit);
   }
 
-  const inputRef = useRef(null);
-
   return (
     <>
       <Nav />
@@ -49,31 +39,76 @@ function Profile() {
         {loading ? (
           <div className="account">Loading profile...</div>
         ) : (
-          <form className="title" onSubmit={handleEdit}>
+          <form method="post" className="title" onSubmit={handleEdit}>
             {edit ? (
-              <div>
-                <input
-                  className="account-title"
-                  type="text"
-                  ref={inputRef}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />{" "}
-                <button
-                  type="submit"
-                  className="edit-button"
-                  onClick={(e) => {
-                    e.target.blur();
-                  }}
-                >
-                  {edit ? "Save" : "Edit Name"}
-                </button>
+              <div className="edit-username">
+                <div>
+                  <label htmlFor="username" className="account-title">
+                    Username
+                  </label>
+                  <input
+                    className="account-title"
+                    name="username"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="user-firstName" className="account-title">
+                    First Name
+                  </label>
+                  <input
+                    name="user-firstName"
+                    className="account-title"
+                    type="text"
+                    value={body?.firstName}
+                    disabled
+                  />
+                </div>
+                <div>
+                  <label htmlFor="user-lastName" className="account-title">
+                    Last Name
+                  </label>
+                  <input
+                    name="user-lastName"
+                    className="account-title"
+                    type="text"
+                    value={body?.lastName}
+                    disabled
+                  />
+                </div>
+                <div className="edit-buttons">
+                  <button
+                    type="submit"
+                    className="single-button"
+                    onClick={(e) => {
+                      e.target.blur();
+                    }}
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="cancel"
+                    className="single-button"
+                    onClick={() => {
+                      setEdit(!edit);
+                      setUsername("");
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             ) : (
-              <h1>
-                Welcome back, {body?.firstName} {body?.lastName}{" "}
-                {body?.userName}
-              </h1>
+              <div>
+                <h1>
+                  Welcome back,
+                  <span className="account-name">
+                    {" " + body?.firstName + " " + body?.userName}
+                  </span>
+                </h1>
+              </div>
             )}
             {!edit && (
               <button type="submit" className="edit-button">
@@ -88,7 +123,7 @@ function Profile() {
             <p className="account-amount">$2,082.79</p>
             <p className="account-amount-description">Available Balance</p>
           </div>
-          <div className="account-content-wrapper cta">
+          <div className="cta">
             <button className="transaction-button">View transactions</button>
           </div>
         </section>

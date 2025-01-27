@@ -1,39 +1,43 @@
 .banner {
-  margin: 0;
-  background: url("../../assets/img/bank-tree.jpeg") 50% 50% / cover no-repeat;
-  background-position: 0% 33%;
-  height: 400px;
+  background: url("../../assets/img/bank-tree.jpeg");
+  background-position: 0 -50px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 300px;
   position: relative;
 
-  @media screen and (max-width: 655px) {
-    margin: 19px 0;
-    padding-top: 27px;
-    padding-bottom: 22px;
-    height: 111px;
+  @media (min-width: 920px) {
+    height: 400px;
+    background-position: 0% 33%;
   }
 
   .banner-content {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    width: 300px;
-    margin: 2rem;
+    position: relative;
+    top: 2rem;
+    width: 200px;
     background: white;
     padding: 2rem;
     text-align: left;
+    margin: 0 auto;
 
-    h1,
-    h2 {
+    @media (min-width: 655px) {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+      width: 300px;
+      margin: 2rem;
+    }
+
+    p {
       font-family: Avenir, Helvetica, Arial, sans-serif;
-      font-size: 24px;
-      font-weight: 700;
+      font-weight: bold;
+      font-size: 1.2rem;
       line-height: 142.6%;
       color: #2c3e50;
+      margin: 0;
 
-      @media screen and (max-width: 655px) {
-        font-size: 24px;
-        left: 42%;
-        text-align: left;
+      @media (min-width: 920px) {
+        font-size: 1.5rem;
       }
     }
   }

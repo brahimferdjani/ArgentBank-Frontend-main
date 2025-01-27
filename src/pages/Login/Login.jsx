@@ -39,30 +39,16 @@ function Login() {
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
-          <form onSubmit={handleLogin}>
+          <p className="sign-in-title">Sign In</p>
+          <form method="post" onSubmit={handleLogin}>
             <div className="input-wrapper">
               <label htmlFor="username">Username</label>
-              {checked ? (
-                <input
-                  type="text"
-                  id="username"
-                  value={checked ? localStorage.getItem("userEmail") : username}
-                  onChange={(e) =>
-                    setUsername(e.target.value) ||
-                    localStorage.setItem("userEmail", e.target.value)
-                  }
-                />
-              ) : (
-                <input
-                  type="text"
-                  id="username"
-                  value={username || localStorage.getItem("userEmail")}
-                  onChange={(e) =>
-                    setUsername(e.target.value) ||
-                    localStorage.setItem("userEmail", e.target.value)
-                  }
-                />
-              )}
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
@@ -71,6 +57,7 @@ function Login() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <div className="input-remember">

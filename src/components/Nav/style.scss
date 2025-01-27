@@ -10,26 +10,44 @@
   }
 
   .flex-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .header-nav {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    text-align: right;
-    color: #2c3e50;
-    font-weight: bold;
-    margin-right: 0.5rem;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
+    @media (max-width: 720px) {
+      font-size: 0.84rem;
+      flex-direction: column;
     }
-    a {
-      font-weight: bold;
+
+    .header-nav {
+      font-family: Avenir, Helvetica, Arial, sans-serif;
+      text-align: right;
       color: #2c3e50;
+      font-weight: bold;
       text-decoration: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      i {
+        margin-right: 5px;
+      }
+
+      p {
+        margin: 0;
+        cursor: pointer;
+      }
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      a {
+        font-weight: bold;
+        color: #2c3e50;
+        text-decoration: none;
+        font-weight: 700;
+
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
     }
   }
 }

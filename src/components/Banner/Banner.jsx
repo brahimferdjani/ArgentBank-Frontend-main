@@ -3,8 +3,8 @@ function Banner() {
   return (
     <div className="banner">
       <div className="banner-content">
-        <h1>Argent Bank</h1>
-        <h2>Welcome to Argent Bank</h2>
+        <p>Argent Bank</p>
+        <p>Welcome to Argent Bank</p>
       </div>
     </div>
   );

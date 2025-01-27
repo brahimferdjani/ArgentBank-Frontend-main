@@ -6,13 +6,6 @@ export const loginUser = createAsyncThunk("post/loginUser", async (user) => {
         const { data } = await axios.post('http://localhost:3001/api/v1/user/login', { email: user.email, password: user.password });
         console.log("post payload :", data);
         user.rememberMe ? localStorage.setItem("token", data.body.token) : sessionStorage.setItem("token", data.body.token);
-        if (sessionStorage.getItem("token")) {
-            setTimeout(() => {
-                sessionStorage.removeItem("token");
-            }, 5000);
-        } else if (localStorage.getItem("token")) {
-            localStorage.setItem("userEmail", user.email);
-        }
         return data;
     } catch (error) {
         return error.response.data;
@@ -31,7 +24,7 @@ const postSlice = createSlice({
         logout: (state) => {
             state.token = null;
             state.error = null;
-            localStorage.removeItem("token");
+            localStorage.clear();
             sessionStorage.clear();
         }
     },
