@@ -3,12 +3,12 @@ import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { editName } from "../../Store/editSlice";
-import { userInfo } from "../../Store/getSlice";
+import { editName } from "../../Store/userSlice";
+import { userInfo } from "../../Store/userSlice";
 
 function Profile() {
   const dispatch = useDispatch();
-  const { body, status } = useSelector((state) => state.get);
+  const { body, status } = useSelector((state) => state.user);
 
   const loading = status === "loading";
 

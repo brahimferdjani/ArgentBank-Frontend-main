@@ -6,12 +6,12 @@ import NotFound from "./pages/NotFound/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userInfo } from "./Store/getSlice";
+import { userInfo } from "./Store/userSlice";
 
 function App() {
   const dispatch = useDispatch();
 
-  const { token } = useSelector((state) => state.post);
+  const { token } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (

@@ -4,7 +4,7 @@ import "./style.scss";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { logout } from "../../Store/postSlice";
+import { logout } from "../../Store/userSlice";
 import { useDispatch } from "react-redux";
 
 function Nav() {
@@ -13,8 +13,12 @@ function Nav() {
     navigate("/login");
   }
 
-  const { body } = useSelector((state) => state.get);
+  const { body } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  function navHome() {
+    navigate("/profile");
+  }
 
   function handleLogout() {
     dispatch(logout());
@@ -35,20 +39,18 @@ function Nav() {
       </Link>
       <div className="flex-box">
         {isLogged ? (
-          <div>
-            <div className="header-nav">
-              <Link to="/profile">
-                <i className="fa fa-user-circle"></i>
-                {" " + body?.userName}
-              </Link>
+          <div className="header-nav">
+            <div className="user-nav" onClick={navHome}>
+              <i className="fa fa-user-circle"></i>
+              <p>{body?.userName}</p>
             </div>
-            <div className="header-nav" onClick={handleLogout}>
+            <div className="user-nav" onClick={handleLogout}>
               <i className="fa-solid fa-right-from-bracket"></i>
               <p>Sign Out</p>
             </div>
           </div>
         ) : (
-          <div className="header-nav" onClick={handleClick}>
+          <div onClick={handleClick}>
             <i className="fa fa-user-circle"></i>
             <p>Sign In</p>
           </div>

@@ -3,8 +3,8 @@ import Nav from "../../components/Nav/Nav";
 import "./style.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../Store/postSlice";
-import { userInfo } from "../../Store/getSlice";
+import { loginUser } from "../../Store/userSlice";
+import { userInfo } from "../../Store/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -14,7 +14,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  let { status } = useSelector((state) => state.post);
+  let { status } = useSelector((state) => state.user);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -69,7 +69,8 @@ function Login() {
               />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            {status == 400 && <p className="error">Invalid Fields</p>}
+            {status == 400 ||
+              (status == 401 && <p className="error">Invalid Fields</p>)}
             {status == 500 && <p className="error">Internal Server Error</p>}
             <button type="submit" className="sign-in-button">
               Sign In
