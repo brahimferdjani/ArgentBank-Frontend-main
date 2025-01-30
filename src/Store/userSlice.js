@@ -38,7 +38,7 @@ export const editName = createAsyncThunk("user/editName", async (editUser) => {
 });
 
 
-const postSlice = createSlice({
+const userSlice = createSlice({
     name: "post",
     initialState: {
         status: null,
@@ -114,6 +114,6 @@ const postSlice = createSlice({
     }
 });
 
-export const { logout } = postSlice.actions;
+export const { logout } = userSlice.actions;
 
-export default postSlice.reducer;
+export default userSlice.reducer;

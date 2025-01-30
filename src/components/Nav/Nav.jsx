@@ -50,7 +50,7 @@ function Nav() {
             </div>
           </div>
         ) : (
-          <div onClick={handleClick}>
+          <div className="user-nav" onClick={handleClick}>
             <i className="fa fa-user-circle"></i>
             <p>Sign In</p>
           </div>

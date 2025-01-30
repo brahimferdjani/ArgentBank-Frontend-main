@@ -5,6 +5,7 @@ import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { editName } from "../../Store/userSlice";
 import { userInfo } from "../../Store/userSlice";
+import Transactions from "../../components/Transactions/Transactions";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -117,16 +118,7 @@ function Profile() {
             )}
           </form>
         )}
-        <section className="account">
-          <div className="account-content-wrapper">
-            <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-            <p className="account-amount">$2,082.79</p>
-            <p className="account-amount-description">Available Balance</p>
-          </div>
-          <div className="cta">
-            <button className="transaction-button">View transactions</button>
-          </div>
-        </section>
+        <Transactions />
       </main>
       <Footer />
     </>

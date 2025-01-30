@@ -4,17 +4,41 @@
   align-items: center;
   padding: 5px 20px;
 
-  .main-nav-logo-image {
-    max-width: 100%;
-    width: 200px;
+  @media (max-width: 720px) {
+    padding: 5px 13px;
+  }
+
+  a {
+    @media (max-width: 720px) {
+      width: 125px;
+    }
+
+    .main-nav-logo-image {
+      max-width: 100%;
+      width: 200px;
+    }
   }
 
   .flex-box {
+    .user-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer;
+
+      p {
+        margin-left: 5px;
+      }
+    }
     .header-nav {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      width: 140px;
+      width: 150px;
+
+      @media (min-width: 720px) {
+        width: 150px;
+      }
 
       .user-nav {
         display: flex;

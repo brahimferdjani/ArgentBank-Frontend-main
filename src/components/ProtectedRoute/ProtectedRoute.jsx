@@ -13,3 +13,4 @@ ProtectedRoute.propTypes = {
 };
 
 export default ProtectedRoute;
+//explain during test
