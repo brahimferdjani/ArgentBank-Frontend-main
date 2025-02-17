@@ -52,6 +52,7 @@ function Profile() {
                     name="username"
                     type="text"
                     value={username}
+                    placeholder={body?.userName}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>

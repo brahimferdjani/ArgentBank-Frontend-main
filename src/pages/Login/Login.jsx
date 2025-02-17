@@ -11,6 +11,7 @@ function Login() {
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [checked, setChecked] = useState(true);
+  let [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,6 +30,8 @@ function Login() {
       setUsername("");
       setPassword("");
       navigate("/profile");
+    } else if (result.error) {
+      setError("Internal Server Error");
     }
     dispatch(userInfo());
   };
@@ -69,9 +72,11 @@ function Login() {
               />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            {status == 400 ||
-              (status == 401 && <p className="error">Invalid Fields</p>)}
-            {status == 500 && <p className="error">Internal Server Error</p>}
+            {status == "401" && (
+              <p className="error">Invalid username or password</p>
+            )}
+            {status == "500" && <p className="error">Internal Server Error</p>}
+            {error && <p className="error">{error}</p>}
             <button type="submit" className="sign-in-button">
               Sign In
             </button>

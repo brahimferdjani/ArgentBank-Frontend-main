@@ -39,7 +39,7 @@ function Nav() {
       </Link>
       <div className="flex-box">
         {isLogged ? (
-          <div className="header-nav">
+          <>
             <div className="user-nav" onClick={navHome}>
               <i className="fa fa-user-circle"></i>
               <p>{body?.userName}</p>
@@ -48,7 +48,7 @@ function Nav() {
               <i className="fa-solid fa-right-from-bracket"></i>
               <p>Sign Out</p>
             </div>
-          </div>
+          </>
         ) : (
           <div className="user-nav" onClick={handleClick}>
             <i className="fa fa-user-circle"></i>

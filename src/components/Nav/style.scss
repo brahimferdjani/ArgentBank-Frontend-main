@@ -20,34 +20,27 @@
   }
 
   .flex-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+
     .user-nav {
       display: flex;
       flex-direction: row;
       align-items: center;
       cursor: pointer;
 
+      i {
+        margin-right: 2px;
+      }
+
       p {
-        margin-left: 5px;
-      }
-    }
-    .header-nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 150px;
+        margin: 0;
+        font-size: medium;
 
-      @media (min-width: 720px) {
-        width: 150px;
-      }
-
-      .user-nav {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        cursor: pointer;
-
-        p {
-          margin-left: 5px;
+        @media (max-width: 720px) {
+          font-size: small;
         }
       }
     }
