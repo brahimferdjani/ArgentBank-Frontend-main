@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from "../../assets/img/argentBankLogo.png";
+import Logo from "../../assets/webpformat/argentBankLogo_1.webp";
 import "./style.scss";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
